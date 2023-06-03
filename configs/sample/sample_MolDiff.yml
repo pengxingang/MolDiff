@@ -1,0 +1,14 @@
+
+model:
+  checkpoint: ckpt/MolDiff.pt
+
+bond_predictor: ckpt/bondpred.pt
+
+sample:
+  seed: 2023
+  batch_size: 512
+  num_mols: 1000
+  save_traj_prob: 0.02
+  guidance:
+    - uncertainty
+    - 1.e-4

@@ -1,0 +1,9 @@
+
+model:
+  checkpoint: ckpt/MolDiff_simple.pt
+
+sample:
+  seed: 2023
+  batch_size: 1024
+  num_mols: 1000
+  save_traj_prob: 0.02

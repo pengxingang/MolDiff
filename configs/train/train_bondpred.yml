@@ -1,0 +1,65 @@
+model:
+  name: bond_predictor
+  node_dim: 256
+  edge_dim: 64
+  encoder:
+    backbone: NodeEdgeNet
+    num_blocks: 8
+    cutoff: 20
+    use_gate: True
+    update_edge: True
+    update_pos: False  # pos should not be updated
+  diff:
+    num_timesteps: 1000
+    time_dim: 20
+    categorical_space: discrete
+    diff_pos:
+      beta_schedule: advance
+      scale_start: 0.9999
+      scale_end: 0.0001
+      width: 3
+    diff_atom: 
+      init_prob: tomask
+      beta_schedule: advance
+      scale_start: 0.9999
+      scale_end: 0.0001
+      width: 3
+
+train:
+  seed: 2023
+  batch_size: 256
+  num_workers: 64
+  pin_memory: True
+  max_iters: 300_000
+  val_freq: 1000
+  pos_noise_std: 0.05
+  max_grad_norm: 50.0
+  use_amp: True
+  optimizer:
+    type: adamw
+    lr: 1.e-4
+    weight_decay: 1.e-8
+    beta1: 0.99
+    beta2: 0.999
+  scheduler:
+    type: plateau
+    factor: 0.8
+    patience: 1000
+    min_lr: 1.e-5
+
+transform:
+  use_mask_node: True
+  use_mask_edge: False
+
+dataset:
+  name: drug3d
+  root: ./data/geom_drug
+  path_dict:
+    sdf: sdf
+    summary: mol_summary.csv
+    processed: processed.lmdb
+  split: split_by_molid.pt
+
+chem:
+  atomic_numbers: [6,7,8,9,15,16,17]  # C N O F P S Cl
+  mol_bond_types: [1, 2, 3, 4]  # single, double, triple, aromatic
