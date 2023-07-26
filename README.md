@@ -3,7 +3,7 @@
 
 > This can serve as a better backbone for other applications of 3D molecule diffusion models such as pocket-based generation and linker generation.
 
-More information can be found in our [paper](https://arxiv.org/abs/2305.07508)
+More information can be found in our [paper](https://proceedings.mlr.press/v202/peng23b.html).
 
 
 ## Installation
@@ -66,6 +66,7 @@ data
 │   ├── split_by_molid.pt
 │   └── sdf
 │       ├── 0.sdf
+│       ├── 1.sdf
 │       ├── ...
 ```
 Then by running any sampling, training or evaluation script, the data will be processed automatically.
@@ -73,7 +74,7 @@ Then by running any sampling, training or evaluation script, the data will be pr
 
 ## Sample
 
-We provide the sampling config file `sample_MolDiff.yml` in `configs/sample` folder. We also provide a simplified version of MolDiff `sample_MolDiff_simple.yml` that does not use the bond guidance for sampling and uses the model trained withoud the new bond noise schedule proposed in the paper. 
+We provide the sampling config file `sample_MolDiff.yml` in `configs/sample` folder. We also provide a simplified version of MolDiff `sample_MolDiff_simple.yml` that does not use the bond guidance for sampling and uses the model trained without the new bond noise schedule proposed in the paper. 
 
 To sample molecules using pretrained models, please first download the pretrained model weights from [here](https://drive.google.com/drive/folders/1zTrjVehEGTP7sN3DB5jaaUuMJ6Ah0-ps?usp=sharing) and put them in the `./ckpt` folder. There are three model weight files: 
 - `MolDiff.pt`: the pretrained complete MolDiff model.
@@ -134,6 +135,24 @@ python scripts/train_drug3d.py --config ./configs/train/train_MolDiff.yml --devi
 To use the bond predictor for guidance during sampling, you also need to train a bond predictor:
 ```python
 python scripts/train_bond.py --config ./configs/train/train_bondpred.yml --device cuda:1 --logdir ./logs
+```
+
+## Citation
+```bibtex
+@InProceedings{pmlr-v202-peng23b,
+  title =   {{M}ol{D}iff: Addressing the Atom-Bond Inconsistency Problem in 3{D} Molecule Diffusion Generation},
+  author =       {Peng, Xingang and Guan, Jiaqi and Liu, Qiang and Ma, Jianzhu},
+  booktitle =   {Proceedings of the 40th International Conference on Machine Learning},
+  pages =   {27611--27629},
+  year =   {2023},
+  editor =   {Krause, Andreas and Brunskill, Emma and Cho, Kyunghyun and Engelhardt, Barbara and Sabato, Sivan and Scarlett, Jonathan},
+  volume =   {202},
+  series =   {Proceedings of Machine Learning Research},
+  month =   {23--29 Jul},
+  publisher =    {PMLR},
+  pdf =   {https://proceedings.mlr.press/v202/peng23b/peng23b.pdf},
+  url =   {https://proceedings.mlr.press/v202/peng23b.html},
+}
 ```
 
 ## Contact
