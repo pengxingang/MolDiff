@@ -6,6 +6,9 @@
 More information can be found in our [paper](https://proceedings.mlr.press/v202/peng23b.html).
 
 
+> **Update Jul 23, 2024**  
+> Add the trained MolDiff checkpoint on the QM9 dataset and the corresponding sampling configuration file. See the `ckpt` directory.
+
 ## Installation
 ### Dependency
 The codes have been tested in the following environment:
