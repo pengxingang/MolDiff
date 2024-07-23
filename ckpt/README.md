@@ -9,3 +9,4 @@ ckpt
 ├── MolDiff_simple.pt
 └── bond_predictor.pt
 ```
+The pretrained models on the QM9 dataset and sampling config files are also available from [here](https://drive.google.com/drive/folders/1zTrjVehEGTP7sN3DB5jaaUuMJ6Ah0-ps?usp=sharing) now.
